@@ -7,5 +7,6 @@ import retrofit2.http.GET
 interface ApiFoodService {
     @GET("/foods")
     fun getFoods(): Call<List<Food>>
+    abstract fun addFood(newFood: Food): Any
 
 }

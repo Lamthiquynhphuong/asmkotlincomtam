@@ -4,12 +4,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.widget.*
 import androidx.activity.ComponentActivity
 import androidx.core.view.setPadding
 import edu.phuong.comtam.Model.LoginResponse
 import edu.phuong.comtam.RetrofitAll.RetrofitClient
+import edu.phuong.comtam.ui.NavigationAdmin
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,7 +61,8 @@ class Login : ComponentActivity() {
                 setMargins(0, 0, 0, 20) // Khoảng cách giữa các EditText
             }
             setPadding(32)
-            background = createEditTextDrawable(Color.parseColor("#3F51B5")) // Viền màu xanh tím với bo góc
+            background =
+                createEditTextDrawable(Color.parseColor("#3F51B5")) // Viền màu xanh tím với bo góc
             setTextColor(Color.parseColor("#212121")) // Màu chữ đen
             setHintTextColor(Color.parseColor("#757575")) // Màu gợi ý
             textSize = 16f
@@ -68,13 +71,15 @@ class Login : ComponentActivity() {
         // Tạo EditText cho password
         etPassword = EditText(this).apply {
             hint = "Password"
-            inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+            inputType =
+                android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 130 // Chiều cao là 130dp
             )
             setPadding(32)
-            background = createEditTextDrawable(Color.parseColor("#3F51B5")) // Viền màu xanh tím với bo góc
+            background =
+                createEditTextDrawable(Color.parseColor("#3F51B5")) // Viền màu xanh tím với bo góc
             setTextColor(Color.parseColor("#212121"))
             setHintTextColor(Color.parseColor("#757575")) // Màu gợi ý
             textSize = 16f
@@ -101,7 +106,8 @@ class Login : ComponentActivity() {
                 if (username.isNotEmpty() && password.isNotEmpty()) {
                     login(username, password)
                 } else {
-                    Toast.makeText(this@Login, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Login, "Please fill in all fields", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
@@ -128,37 +134,33 @@ class Login : ComponentActivity() {
 
     // Tạo Drawable cho nút đăng nhập với bo góc và màu gradient
     private fun createButtonDrawable(): GradientDrawable {
-        return GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(
-            Color.parseColor("#3F51B5"), // Gradient bắt đầu từ màu xanh tím
-            Color.parseColor("#5C6BC0")  // Kết thúc bằng màu xanh nhạt hơn
-        )).apply {
+        return GradientDrawable(
+            GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(
+                Color.parseColor("#3F51B5"), // Gradient bắt đầu từ màu xanh tím
+                Color.parseColor("#5C6BC0")  // Kết thúc bằng màu xanh nhạt hơn
+            )
+        ).apply {
             shape = GradientDrawable.RECTANGLE
             cornerRadius = 40f // Bo góc cho nút
         }
     }
 
     private fun login(username: String, password: String) {
-        val call = RetrofitClient.instance.login(username, password)
-
-        call.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful) {
-                    val token = response.body()?.id // Hoặc trường nào bạn cần từ LoginResponse
-                    Toast.makeText(this@Login, "Login Successful! Token: $token", Toast.LENGTH_SHORT).show()
-
-                    // Khởi động Navigation Activity
-                    val intent = Intent(this@Login, Navigation::class.java)
-                    startActivity(intent)
-                    finish() // Kết thúc Activity Login để không quay lại
-                    // Lưu token và chuyển sang màn hình khác nếu cần
-                } else {
-                    Toast.makeText(this@Login, "Login Failed", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(this@Login, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+        // Kiểm tra xem tài khoản là admin hay user
+        if (username == "admin" && password == "admin123") {
+            // Nếu là admin, chuyển đến NavigationAdmin
+            val intent = Intent(this@Login, NavigationAdmin::class.java)
+            startActivity(intent)
+            finish() // Kết thúc Activity Login để không quay lại
+        } else if (username == "user" && password == "user123") {
+            // Nếu là user, chuyển đến Navigation (dành cho người dùng thông thường)
+            val intent = Intent(this@Login, Navigation::class.java)
+            startActivity(intent)
+            finish() // Kết thúc Activity Login để không quay lại
+        } else {
+            // Nếu username hoặc password sai
+            Toast.makeText(this@Login, "Login Failed: Incorrect username or password", Toast.LENGTH_SHORT).show()
+        }
     }
-}
+    }
+

@@ -8,5 +8,6 @@ data class LoginResponse(
     val username: String,
     val token: String,   // Token nhận được khi đăng nhập thành công
     val status: String,  // "success" hoặc "failed"
-    val message: String? // Thông báo lỗi nếu có
+    val message: String?,
+    val role: String // Thêm trường role
 )

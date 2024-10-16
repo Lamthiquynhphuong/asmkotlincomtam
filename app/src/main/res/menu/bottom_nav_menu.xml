@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/homead"
+    android:title="Trang Chủ" />
+
+    <item
+        android:id="@+id/management"
+        android:icon="@drawable/quanly"
+    android:title="Quản Lý" />
+
+    <item
+        android:id="@+id/statistics"
+        android:icon="@drawable/thongke"
+    android:title="Thống Kê" />
+
+    <item
+        android:id="@+id/support"
+        android:icon="@drawable/alo"
+    android:title="Hỗ Trợ" />
+</menu>

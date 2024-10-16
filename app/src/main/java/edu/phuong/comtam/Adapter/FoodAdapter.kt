@@ -15,6 +15,7 @@ class FoodAdapter(private var foodList: List<Food>) : RecyclerView.Adapter<FoodA
 
     class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val foodName: TextView = itemView.findViewById(R.id.food_name)
+        val foodPrice: TextView = itemView.findViewById(R.id.food_price)
         val foodDescription: TextView = itemView.findViewById(R.id.food_description)
         val foodImage: ImageView = itemView.findViewById(R.id.food_image) // Thêm ImageView cho hình ảnh
     }
@@ -29,6 +30,7 @@ class FoodAdapter(private var foodList: List<Food>) : RecyclerView.Adapter<FoodA
         holder.foodName.text = currentFood.name
         holder.foodDescription.text = currentFood.description
 
+        holder.foodPrice.text = "${currentFood.price} đ"
         // Tải hình ảnh từ thumbnail URL
         Glide.with(holder.itemView.context)
             .load(currentFood.thumbnail) // Sử dụng trường imageUrl trong Food

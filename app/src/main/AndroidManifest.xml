@@ -28,17 +28,41 @@
         <activity
             android:name=".Login"
             android:exported="true"
-            android:label="Login"
+            android:label="Login Admin"
             android:theme="@style/Theme.Comtam">
 
         </activity>
         <activity
-            android:name=".Navigation"
+            android:name=".ui.LoginAdmin"
             android:exported="true"
-            android:label="Login"
+            android:label="Navigation Admin"
             android:theme="@style/Theme.Comtam">
 
         </activity>
+
+        <activity
+            android:name=".Navigation"
+            android:exported="true"
+            android:label="Navigation Admin"
+            android:theme="@style/Theme.Comtam">
+
+        </activity>
+        <activity
+            android:name=".ui.NavigationAdmin"
+            android:exported="true"
+            android:label="Navigation Admin"
+            android:theme="@style/Theme.Comtam">
+
+        </activity>
+        <activity
+            android:name=".NavigationActivity"
+            android:exported="true"
+            android:label="Navigation"
+            android:theme="@style/Theme.Comtam">
+
+        </activity>
+
+
     </application>
 
 </manifest>

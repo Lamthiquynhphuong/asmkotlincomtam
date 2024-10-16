@@ -82,5 +82,12 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
     implementation ("com.github.bumptech.glide:glide:4.15.0") // Cập nhật phiên bản nếu cần
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.0") // Dùng để hỗ trợ annotation processor
+    kapt ("com.github.bumptech.glide:compiler:4.15.0") // Dùng để hỗ trợ annotation processor
+    implementation ("com.google.android.material:material:1.9.0")
+    implementation ("com.github.bumptech.glide:glide:4.15.0")// Kiểm tra phiên bản mới nhất
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.0") // Thêm dòng này
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
+    implementation ("androidx.fragment:fragment:1.5.5")
+
 }
